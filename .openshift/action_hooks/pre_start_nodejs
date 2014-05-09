@@ -1,4 +1,7 @@
 #!/bin/bash
+
+echo "running pre_start_nodejs script..."
+
 echo "Exporting Node Environment (production)"
 export NODE_ENV=production
 

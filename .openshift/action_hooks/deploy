@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "running deploy script..."
+
 echo "Creating persistent Ghost data directory"
 if [ ! -d "$OPENSHIFT_DATA_DIR/content/data" ]; then
 	mkdir -p $OPENSHIFT_DATA_DIR/content/data
