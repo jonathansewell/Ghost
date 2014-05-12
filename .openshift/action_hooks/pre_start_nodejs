@@ -5,6 +5,21 @@ echo "running pre_start_nodejs script..."
 echo "Exporting Node Environment (production)"
 export NODE_ENV=production
 
+# data directories
+if [ ! -d "$OPENSHIFT_DATA_DIR/content/data" ]; then
+    echo "Creating persistent Ghost data directory"
+    mkdir -p $OPENSHIFT_DATA_DIR/content/data
+fi
+if [ ! -d "$OPENSHIFT_DATA_DIR/content/images" ]; then
+    echo "Creating persistent Ghost images directory"
+    mkdir -p $OPENSHIFT_DATA_DIR/content/images
+fi
+echo "Symlinking data directory"
+ln -sf $OPENSHIFT_DATA_DIR/content/data $OPENSHIFT_REPO_DIR/content/data
+echo "Symlinking images directory"
+ln -sf $OPENSHIFT_DATA_DIR/content/images $OPENSHIFT_REPO_DIR/content/images
+
+
 # If there is a grunt file, run $ grunt prod
 if [ -f "${OPENSHIFT_REPO_DIR}"/Gruntfile.js ]; then
 	HOME=$HOME/app-root/runtime
